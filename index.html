@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Sensi App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #0f0f0f, #1f1f1f);
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      background: url('https://i.imgur.com/hGQqK9D.gif') no-repeat center center/cover;
+      padding: 50px 20px;
+    }
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 0 0 20px red;
+    }
+    .premium, .basic {
+      background: rgba(255, 255, 255, 0.05);
+      margin: 20px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #ff0000;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+    .red-glow {
+      color: #ff4444;
+      font-weight: bold;
+    }
+    .mascara-oni {
+      width: 100px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px red); }
+      to { filter: drop-shadow(0 0 20px red); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.imgur.com/3HRg7pL.png" alt="Máscara ONI" class="mascara-oni">
+    <h1>SMART SENSI 2.0 🔥</h1>
+    <p class="red-glow">Mira el 2 | Mira el 4 | Todo rojo</p>
+  </header>  <div class="basic">
+    <h2>Versión Básica (200 Créditos)</h2>
+    <p>Elige tu dispositivo y arma</p>
+    <select id="dispositivo">
+      <option value="Samsung A10">Samsung A10</option>
+      <option value="Redmi Note 9">Redmi Note 9</option>
+      <option value="Motorola G8">Motorola G8</option>
+    </select>
+    <select id="arma">
+      <option value="M500">M500</option>
+      <option value="MP40">MP40</option>
+      <option value="M1014">M1014</option>
+      <option value="Deagle">Deagle</option>
+    </select>
+    <button onclick="generarSensi('basica')">Generar Sensibilidad</button>
+    <div id="output-basica"></div>
+  </div>  <div class="premium">
+    <h2>Zona Premium 🔒</h2>
+    <input type="password" id="codigoPremium" placeholder="Ingresa código o número NEQUI">
+    <button onclick="verificarPremium()">Verificar Acceso</button>
+    <div id="zonaPremium" style="display:none;">
+      <p>Bienvenido a la IA Premium 😎</p>
+      <select id="arma-premium">
+        <option value="M500">M500</option>
+        <option value="MP40">MP40</option>
+        <option value="M1014">M1014</option>
+        <option value="Deagle">Deagle</option>
+      </select>
+      <button onclick="generarSensi('premium')">Generar Sensibilidad Avanzada</button>
+      <div id="output-premium"></div>
+    </div>
+  </div>  <script>
+    let creditos = 200;
+
+    function generarSensi(tipo) {
+      if (tipo === 'basica' && creditos < 3) {
+        alert('No tienes créditos. Mira un anuncio para obtener más.');
+        return;
+      }
+      const sensibilidades = Array.from({length: 5}, () => Math.floor(Math.random() * 201));
+      const disparo = Math.floor(Math.random() * 201);
+      const dpi = 400 + Math.floor(Math.random() * 601);
+      const salida = Sensibilidades: Mira 2x ${sensibilidades[0]}, 4x ${sensibilidades[1]}, Mira libre ${sensibilidades[2]}, Cámara ${sensibilidades[3]}, General ${sensibilidades[4]}<br>Botón de disparo: ${disparo}<br>DPI: ${dpi};
+
+      if (tipo === 'basica') {
+        creditos -= 3;
+        document.getElementById('output-basica').innerHTML = salida + <br>Créditos restantes: ${creditos};
+      } else {
+        document.getElementById('output-premium').innerHTML = salida + ' <br><span class="red-glow">Versión Avanzada</span>';
+      }
+    }
+
+    function verificarPremium() {
+      const codigo = document.getElementById('codigoPremium').value;
+      if (codigo === '2009-1970') {
+        document.getElementById('zonaPremium').style.display = 'block';
+      } else {
+        alert('Acceso denegado. Número inválido o no has pagado.');
+      }
+    }
+  </script></body>
+</html>
